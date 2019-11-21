@@ -1,8 +1,10 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class EvaluationService {
 
@@ -11,11 +13,17 @@ public class EvaluationService {
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
 	 * 
 	 * @param string
-	 * @return
 	 */
+	
+	
 	public String reverse(String string) {
 		
-		return "";
+		String reverseString = "";
+		
+		for(int i=string.length()-1; i>=0; i--) {
+			reverseString=reverseString + string.charAt(i);
+		}
+		return reverseString;
 	}
 
 	/**
@@ -27,8 +35,9 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		 String newAcronym = "" + phrase.charAt(0);
+		 return newAcronym;
+		 // return indexOf("_") + 1
 	}
 
 	/**
@@ -48,6 +57,7 @@ public class EvaluationService {
 		public Triangle() {
 			super();
 		}
+		
 
 		public Triangle(double sideOne, double sideTwo, double sideThree) {
 			this();
@@ -81,20 +91,32 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if((sideOne==sideTwo) && (sideTwo==sideThree)){
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne==sideTwo) {
+				return true;
+			}else if (sideTwo==sideThree) {
+				return true;
+			} else if (sideOne==sideThree) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if((sideOne!=sideTwo) && (sideOne!=sideThree)) {
+				 return true;
+				} else {
+					return false;
+				}
 		}
-
 	}
 
 	/**
@@ -112,9 +134,48 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		HashMap<String, Integer>hmap = new HashMap<String, Integer>();
+		hmap.put("A", 1);
+		hmap.put("E", 1);
+		hmap.put("I", 1);
+		hmap.put("O", 1);
+		hmap.put("O", 1);
+		hmap.put("U", 1);
+		hmap.put("L", 1);
+		hmap.put("N", 1);
+		hmap.put("R", 1);
+		hmap.put("S", 1);
+		hmap.put("T", 1);
+		
+		hmap.put("D", 2);
+		hmap.put("G", 2);
+		
+		hmap.put("B", 3);
+		hmap.put("C", 3);
+		hmap.put("M", 3);
+		hmap.put("P", 3);
+		
+		hmap.put("F", 4);
+		hmap.put("H", 4);
+		hmap.put("V", 4);
+		hmap.put("W", 4);
+		hmap.put("Y", 4);
+		
+		hmap.put("K", 5);
+		hmap.put("J", 8);
+		hmap.put("X", 8);
+		hmap.put("Z", 10);
+		hmap.put("Q", 10);
+		
+		String[] arr = string.split("");
+		int sum = 0; 
+		for(String m : arr) {
+            //look up the current char in the alphabet and add it's value to sum
+			sum += hmap.get(m.toUpperCase());
+        }
+        return sum;
 	}
 
 	/**
@@ -195,7 +256,7 @@ public class EvaluationService {
 	 * element or, if the search key is greater, on the sub-array to the right.
 	 * 
 	 * If the remaining array to be searched is empty, then the key cannot be found
-	 * in the array and a special "not found" indication is returned.
+	 * in the array and a special "not )found" indication is returned.
 	 * 
 	 * A binary search halves the number of items to check with each iteration, so
 	 * locating an item (or determining its absence) takes logarithmic time. A
