@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.regex.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -209,9 +210,15 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
+	
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		string = string.replaceAll("[^\\d]", "");
+		if (string.length() == 10) {
+			return string;
+		} else {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	/**
@@ -224,8 +231,37 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		Map<String, Integer> map = new HashMap<String, Integer> ();
+		  // turn string into String[]
+		
+		for (String s:strings) {
+		    
+		    if (!map.containsKey(s)) {  // first time we've seen this string
+		      map.put(s, 1);
+		    }
+		    else {
+		      int count = map.get(s);
+		      map.put(s, count + 1);
+		    }
+		  }
+		  return map;
+		
+//		String[] b = string.split(" "); //split the array
+//		
+//		Map<String, Integer> map = new HashMap<>();
+//		
+//		int counter= 0;//initalize counter
+//		for(int i=0; i<b.length; i++) {
+//		     counter = map.get(b[i]);//get element from map
+//		     
+//		     if(map.get(b[i]) == 0) {
+//		          map.put(b[i], 1);
+//		     } else {
+//		          counter++;
+//		           map.put(b[i], counter);
+//		     }
+//		}
+//		return null;
 	}
 
 	/**
