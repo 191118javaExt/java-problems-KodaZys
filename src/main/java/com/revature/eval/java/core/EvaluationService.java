@@ -232,11 +232,12 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		Map<String, Integer> map = new HashMap<String, Integer> ();
-		  // turn string into String[]
-		
-		for (String s:strings) {
+		  
+		String[] separateWords = string.split("\\W+"); // removes non-alphaNum char
+
+		for (String s : separateWords) {
 		    
-		    if (!map.containsKey(s)) {  // first time we've seen this string
+		    if (!map.containsKey(s)) {  // 1st time we see string
 		      map.put(s, 1);
 		    }
 		    else {
@@ -245,23 +246,6 @@ public class EvaluationService {
 		    }
 		  }
 		  return map;
-		
-//		String[] b = string.split(" "); //split the array
-//		
-//		Map<String, Integer> map = new HashMap<>();
-//		
-//		int counter= 0;//initalize counter
-//		for(int i=0; i<b.length; i++) {
-//		     counter = map.get(b[i]);//get element from map
-//		     
-//		     if(map.get(b[i]) == 0) {
-//		          map.put(b[i], 1);
-//		     } else {
-//		          counter++;
-//		           map.put(b[i], counter);
-//		     }
-//		}
-//		return null;
 	}
 
 	/**
@@ -360,8 +344,32 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		if (input % 10 == input) {
+			return true; // this immediately checks if input is 1-digit number
+		}
+		
+		int firstTemp = input; 
+		int numOfDigits = 0; 
+			while (firstTemp >= 1) {  
+				numOfDigits += 1; 
+				firstTemp/=10; // this removes last digit, continue loop
+			}
+		int power = numOfDigits; //this is what we will put as the POWER for e. digit.
+		
+		int secondTemp = input;
+		int digit = 0;
+		int answer = 0;
+		while (secondTemp >= 1) {
+			digit = secondTemp % 10; 
+			answer += Math.pow(digit, power);
+			secondTemp /= 10; // this removes last digit, continue loop
+		}
+		if(answer == input) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
