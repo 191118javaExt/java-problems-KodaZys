@@ -3,6 +3,7 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.regex.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -325,13 +326,16 @@ public class EvaluationService {
 	 * of the word, and then add an "ay" sound to the end of the word. There are a
 	 * few more rules for edge cases, and there are regional variants too.
 	 * 
+	 * 
 	 * See http://en.wikipedia.org/wiki/Pig_latin for more details.
 	 * 
 	 * @param string
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
+		ArrayList<String> words = new ArrayList<String>(Arrays.asList(string.split("\\s")));
+		
+		
 		return null;
 	}
 
@@ -645,8 +649,28 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
+	public static boolean isLuhnValid(String string) {
+		string=string.replace(" ", "");
+		string=string.replace("([a-z]","");
+		string=string.replace("-", "");
+		int[] numbers=new int[string.length()];
+		int i;
+		for(i=0;i<string.length();i++) {
+			numbers[i]=Character.getNumericValue(string.charAt(i));
+		}
+		for(i=numbers.length-2;i>=0;i-=2) {
+			numbers[i]=numbers[i]*2;
+			if(numbers[i]>9) {							
+				numbers[i]=numbers[i]-9;	
+		}
+		}
+		int sum=0;
+		for(i=0;i<numbers.length;i++) {
+			sum=sum+numbers[i];
+		}
+		if(sum%10==0) {
+			return true;
+		}		
 		return false;
 	}
 
