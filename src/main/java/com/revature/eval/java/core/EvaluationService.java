@@ -36,9 +36,15 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		 String newAcronym = "" + phrase.charAt(0);
-		 return newAcronym;
-		 // return indexOf("_") + 1
+		String cleanPhrase = phrase.replaceAll("-", " ");
+		String[] words = cleanPhrase.split(" ");
+		
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i < words.length; i++) {
+			sb.append(words[i].charAt(0));
+		}
+		String acronym = sb.toString().toUpperCase();
+		return acronym;
 	}
 
 	/**
@@ -440,9 +446,25 @@ public class EvaluationService {
 	 * @param i
 	 * @return
 	 */
-	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+	public int calculateNthPrime(int k) {
+		if(k==0) {
+			throw new IllegalArgumentException();
+		}
+		int num=1;
+		int count=0;
+		int i;
+		while (count < k){
+		      num=num+1;
+		      for (i = 2; i <= num; i++){
+		        if (num % i == 0) {
+		          break;
+		        }
+		      }
+		      if ( i == num){
+		        count = count+1;
+		      }
+		    }
+		    return num;
 	}
 
 	/**
@@ -523,7 +545,7 @@ public class EvaluationService {
 
 	/**
 	 * 16. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
-	 * gramma, "every letter") is a sentence using every letter of the alphabet at
+	 * grammar, "every letter") is a sentence using every letter of the alphabet at
 	 * least once. The best known English pangram is:
 	 * 
 	 * The quick brown fox jumps over the lazy dog.
@@ -535,8 +557,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		String cleanString = string.replaceAll("[^A-Za-z]", "");
+		if(cleanString.length() < 26) { 
+			return false;
+		} else if (string.equals("")) {
+			return false;
+		} else {
+			for (char ch = 'a'; ch <= 'z'; ch++) {
+				if(cleanString.indexOf(ch) < 0) {
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 
 	/**
@@ -642,5 +675,4 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
-
 }
