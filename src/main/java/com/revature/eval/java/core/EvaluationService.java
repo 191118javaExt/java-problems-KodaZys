@@ -2,6 +2,7 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.regex.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,44 +144,44 @@ public class EvaluationService {
 	 */
 	
 	public int getScrabbleScore(String string) {
-		HashMap<String, Integer>hmap = new HashMap<String, Integer>();
-		hmap.put("A", 1);
-		hmap.put("E", 1);
-		hmap.put("I", 1);
-		hmap.put("O", 1);
-		hmap.put("O", 1);
-		hmap.put("U", 1);
-		hmap.put("L", 1);
-		hmap.put("N", 1);
-		hmap.put("R", 1);
-		hmap.put("S", 1);
-		hmap.put("T", 1);
+		HashMap<String, Integer>letterMap = new HashMap<String, Integer>();
+		letterMap.put("A", 1);
+		letterMap.put("E", 1);
+		letterMap.put("I", 1);
+		letterMap.put("O", 1);
+		letterMap.put("O", 1);
+		letterMap.put("U", 1);
+		letterMap.put("L", 1);
+		letterMap.put("N", 1);
+		letterMap.put("R", 1);
+		letterMap.put("S", 1);
+		letterMap.put("T", 1);
 		
-		hmap.put("D", 2);
-		hmap.put("G", 2);
+		letterMap.put("D", 2);
+		letterMap.put("G", 2);
 		
-		hmap.put("B", 3);
-		hmap.put("C", 3);
-		hmap.put("M", 3);
-		hmap.put("P", 3);
+		letterMap.put("B", 3);
+		letterMap.put("C", 3);
+		letterMap.put("M", 3);
+		letterMap.put("P", 3);
 		
-		hmap.put("F", 4);
-		hmap.put("H", 4);
-		hmap.put("V", 4);
-		hmap.put("W", 4);
-		hmap.put("Y", 4);
+		letterMap.put("F", 4);
+		letterMap.put("H", 4);
+		letterMap.put("V", 4);
+		letterMap.put("W", 4);
+		letterMap.put("Y", 4);
 		
-		hmap.put("K", 5);
-		hmap.put("J", 8);
-		hmap.put("X", 8);
-		hmap.put("Z", 10);
-		hmap.put("Q", 10);
+		letterMap.put("K", 5);
+		letterMap.put("J", 8);
+		letterMap.put("X", 8);
+		letterMap.put("Z", 10);
+		letterMap.put("Q", 10);
 		
 		String[] arr = string.split("");
 		int sum = 0; 
-		for(String m : arr) {
+		for(String c : arr) {
             //look up the current char in the alphabet and add it's value to sum
-			sum += hmap.get(m.toUpperCase());
+			sum += letterMap.get(c.toUpperCase());
         }
         return sum;
 	}
@@ -389,8 +390,14 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> factors = new ArrayList<Long>();
+		for(long f = 2; f<=l; f++) {
+			while(l % f == 0) {
+				factors.add(f);
+				l /= f;
+			}
+		}
+		return factors;
 	}
 
 	/**
