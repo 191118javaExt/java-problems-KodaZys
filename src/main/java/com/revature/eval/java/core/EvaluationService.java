@@ -606,7 +606,6 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
 		return 0;
 	}
 
@@ -678,8 +677,40 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+	public static int solveWordProblem(String string) {
+		if(string.contains("?")) {
+			string=string.replace("?", "");
+		}
+		String[] split=string.split(" ");
+		int[] nums=new int[2];
+		int i=0;
+		for(String s:split) {
+			if(s.matches("-?\\d+(\\.\\d+)?")) {
+				int num=Integer.parseInt(s);
+				nums[i]=num;
+				i++;
+			}
+		}
+		String check = "";
+			if(string.contains("plus")) {
+				check+="plus";
+			}else if(string.contains("minus")) {
+				check+="minus";
+			}else if(string.contains("divided")) {
+				check+="divided";
+			}else if(string.contains("multiplied")) {
+				check+="multiplied";
+			}
+			switch(check) {
+			case "plus":
+				return nums[0]+nums[1];
+			case "minus":
+				return nums[0]-nums[1];
+			case "divided":
+				return nums[0]/nums[1];
+			case "multiplied":
+				return nums[0]*nums[1];
+		}
+		return -1;
 	}
 }
