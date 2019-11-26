@@ -7,8 +7,10 @@ import java.util.regex.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class EvaluationService {
@@ -338,31 +340,8 @@ public class EvaluationService {
 	
 	
 	public String toPigLatin(String string) {
-		StringBuilder sb = new StringBuilder("");
-		ArrayList<String> words = new ArrayList<String>(Arrays.asList(string.split("\\s"));
-
 		
-		for(String w : words) {
-			if(w.charAt(0) == 'a' || w.charAt(0) == 'e' || w.charAt(0) == 'i' || w.charAt(0) == 'o' 
-					|| w.charAt(0) == 'u' || w.charAt(0) == 'y') {
-				w = w.concat("ay");
-				sb.append(w + " ");	
-			} else {
-				for(int i = 0; i< w.length(); i++) {
-					int position = 0;
-					if(w.charAt(i) == 'a' || w.charAt(i) == 'e' || w.charAt(i) == 'i' || w.charAt(i) == 'o' 
-							|| w.charAt(i) == 'u' || w.charAt(i) == 'y') {
-						position +=i;
-						break;
-					}
-					String consonants = w.substring(0, position-1);
-					w = w.substring(position);
-					w.concat(consonants + "ay");
-					sb.append(w + " ");
-				}
-			}
-		}
-		return sb.toString();
+		return null;
 	}
 
 	/**
@@ -666,7 +645,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		return 0;
+		Set<Integer> hs= new HashSet<Integer>(); 
+		int k=0;
+		int j=0;
+		int num=0;
+		for(j=0;j<set.length;j++) {
+			num=set[j];
+		for(k=1;num*k<i;k++) {
+				int product=num*k;
+				hs.add(product);
+			}
+		}
+		int sum = hs.stream().mapToInt(Integer::intValue).sum();
+		return sum;
 	}
 
 	/**
