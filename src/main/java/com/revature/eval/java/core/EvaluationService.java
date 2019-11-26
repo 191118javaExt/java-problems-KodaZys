@@ -339,9 +339,36 @@ public class EvaluationService {
 	
 	
 	
-	public String toPigLatin(String string) {
+	public  String changeWord(String word) { // applied to each word in the String[]
+		String vowels = "aeiou";
+		String changed = "";
+
+		for(int i = 0, j = 1; j < word.length(); j++) {
+			String chr = word.substring(i, j);
+
+			if(vowels.contains(chr)) { // checks to see if there vowels at beginning of word
+				return word.substring(i) + word.substring(0, i) + "ay";
+			}else {
+				i++;
+			}
+		}
+		return changed;
+	}
+	public  String toPigLatin(String string) {
+		String answer = "";
+		String[] arr = string.split(" "); // splits string into separate words ...to loop through
+		int i =0;
+		// loop through each word and change it with changeWord() method above ^
+		for(String s : arr) {
+			if(i == arr.length -1) {
+				answer += changeWord(s); 
+			}else {
+				answer += changeWord(s) + " ";
+			}
+			i++;
+		}
 		
-		return null;
+		return answer;
 	}
 
 	/**
