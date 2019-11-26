@@ -1,5 +1,7 @@
 package com.revature.eval.java.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
 import java.util.regex.*;
 import java.util.ArrayList;
@@ -332,11 +334,35 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	
+	
+	
 	public String toPigLatin(String string) {
-		ArrayList<String> words = new ArrayList<String>(Arrays.asList(string.split("\\s")));
+		StringBuilder sb = new StringBuilder("");
+		ArrayList<String> words = new ArrayList<String>(Arrays.asList(string.split("\\s"));
+
 		
-		
-		return null;
+		for(String w : words) {
+			if(w.charAt(0) == 'a' || w.charAt(0) == 'e' || w.charAt(0) == 'i' || w.charAt(0) == 'o' 
+					|| w.charAt(0) == 'u' || w.charAt(0) == 'y') {
+				w = w.concat("ay");
+				sb.append(w + " ");	
+			} else {
+				for(int i = 0; i< w.length(); i++) {
+					int position = 0;
+					if(w.charAt(i) == 'a' || w.charAt(i) == 'e' || w.charAt(i) == 'i' || w.charAt(i) == 'o' 
+							|| w.charAt(i) == 'u' || w.charAt(i) == 'y') {
+						position +=i;
+						break;
+					}
+					String consonants = w.substring(0, position-1);
+					w = w.substring(position);
+					w.concat(consonants + "ay");
+					sb.append(w + " ");
+				}
+			}
+		}
+		return sb.toString();
 	}
 
 	/**
@@ -565,7 +591,7 @@ public class EvaluationService {
 			String checkX = Integer.toString((11 - (sum % 11)) % 11);
 			// This checks that total sum is 0
 			if("10".equals(checkX)) {
-				checkX = "X";
+				checkX = "X";  // the last dig is either 0, or it is 10 if there is X
 			}	
 			return checkX.equals(string.substring(9));// isolates the last digit --> 
 			//it is either 10 because there's X, or 0 because !X :)	
@@ -614,8 +640,16 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		LocalDateTime ldt;
+		long gigaSeconds = 1_000_000_000L;
+		if(given instanceof LocalDate) { // checking whether give is instance of LocalDate interface.
+			ldt = ((LocalDate) given).atTime(00, 00, 00); // Casting given to LocalDate
+		} else {
+			ldt = (LocalDateTime) given; // casting given to LocalDateTime
+		}
+		
+		return ldt.plusSeconds(gigaSeconds);
 	}
 
 	/**
