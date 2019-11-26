@@ -550,8 +550,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		string = string.replaceAll("-", "");
+		if(string.length() != 10) {
+			return false;
+		// gatekeeps length	
+			
+		} else if(string.matches("^[X0-9]+$")) { //checks for INVALID CHARACTERS
+			int sum =0;
+			for(int i=0; i<9; i++) {
+				int digit = Integer.parseInt(string.substring(i, i+1));
+				sum += (digit * (10 - i));
+			} // parses chars to digits, multiplies them in decreasing order from 10...
+			
+			String checkX = Integer.toString((11 - (sum % 11)) % 11);
+			// This checks that total sum is 0
+			if("10".equals(checkX)) {
+				checkX = "X";
+			}	
+			return checkX.equals(string.substring(9));// isolates the last digit --> 
+			//it is either 10 because there's X, or 0 because !X :)	
+		} else {
+			return false;
+		}
+		
+
 	}
 
 	/**
