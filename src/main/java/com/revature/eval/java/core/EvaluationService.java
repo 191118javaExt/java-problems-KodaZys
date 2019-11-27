@@ -464,6 +464,11 @@ public class EvaluationService {
 	 */
 	static class RotationalCipher {
 		private int key;
+		
+
+		public int getKey() {
+			return key;
+		}
 
 		public RotationalCipher(int key) {
 			super();
@@ -471,10 +476,35 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String encryptedMsg = "";
+			for(int i=0; i<string.length(); i++) {
+				char ch = string.charAt(i);
+				if(Character.isLetter(ch)) {
+					if(Character.isLowerCase(ch)) {
+						char codeLetter = (char) (ch + this.getKey());
+						// checking if 'codeLetter' is out of bounds so that it goes back to 'z' re: ASCII Char #
+						if(codeLetter>'z') {
+							encryptedMsg += (char) (ch - (26 - this.getKey())); // CHECK
+						} else {
+							encryptedMsg += codeLetter; // if codeLetter < 'z', within bounds, fine.
+						}
+						// copied code for UpperCase letter...
+					} else if (Character.isUpperCase(ch)) {
+						char codeLetter = (char) (ch + this.getKey());
+					
+						if(codeLetter>'Z') { 
+							encryptedMsg += (char) (ch - (26 - this.getKey()));
+						} else {
+							encryptedMsg += codeLetter;
+						}
+					}
+				} else {
+					encryptedMsg += ch;
+				}
+			}
+			return encryptedMsg;
 		}
-
+		
 	}
 
 	/**
