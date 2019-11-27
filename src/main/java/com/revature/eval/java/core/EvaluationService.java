@@ -21,8 +21,6 @@ public class EvaluationService {
 	 * 
 	 * @param string
 	 */
-	
-	
 	public String reverse(String string) {
 		
 		String reverseString = "";
@@ -32,7 +30,6 @@ public class EvaluationService {
 		}
 		return reverseString;
 	}
-
 	/**
 	 * 2. Convert a phrase to its acronym. Techies love their TLA (Three Letter
 	 * Acronyms)! Help generate some jargon by writing a program that converts a
@@ -52,7 +49,6 @@ public class EvaluationService {
 		String acronym = sb.toString().toUpperCase();
 		return acronym;
 	}
-
 	/**
 	 * 3. Determine if a triangle is equilateral, isosceles, or scalene. An
 	 * equilateral triangle has all three sides the same length. An isosceles
@@ -71,7 +67,6 @@ public class EvaluationService {
 			super();
 		}
 		
-
 		public Triangle(double sideOne, double sideTwo, double sideThree) {
 			this();
 			this.sideOne = sideOne;
@@ -190,7 +185,6 @@ public class EvaluationService {
         }
         return sum;
 	}
-
 	/**
 	 * 5. Clean up user-entered phone numbers so that they can be sent SMS messages.
 	 * 
@@ -222,7 +216,6 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	
 	public String cleanPhoneNumber(String string) {
 		
 		string = string.replaceAll("[^\\d]", "");
@@ -232,7 +225,6 @@ public class EvaluationService {
 			throw new IllegalArgumentException();
 		}
 	}
-
 	/**
 	 * 6. Given a phrase, count the occurrences of each word in that phrase.
 	 * 
@@ -259,7 +251,6 @@ public class EvaluationService {
 		  }
 		  return map;
 	}
-
 	/**
 	 * 7. Implement a binary search algorithm.
 	 * 
@@ -315,9 +306,7 @@ public class EvaluationService {
 		public void setSortedList(List<T> sortedList) {
 			this.sortedList = sortedList;
 		}
-
 	}
-
 	/**
 	 * 8. Implement a program that translates from English to Pig Latin.
 	 * 
@@ -336,9 +325,6 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	
-	
-	
 	public String changeWord(String word) { // applied to each word in the String[]
 		String vowels = "aeiou";
 		String changed = "";
@@ -370,10 +356,8 @@ public class EvaluationService {
 			}
 			i++;
 		}
-		
 		return answer;
 	}
-
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
 	 * raised to the power of the number of digits.
@@ -394,7 +378,6 @@ public class EvaluationService {
 		if (input % 10 == input) {
 			return true; // this immediately checks if input is 1-digit number
 		}
-		
 		int firstTemp = input; 
 		int numOfDigits = 0; 
 			while (firstTemp >= 1) {  
@@ -402,7 +385,6 @@ public class EvaluationService {
 				firstTemp/=10; // this removes last digit, continue loop
 			}
 		int power = numOfDigits; //this is what we will put as the POWER for e. digit.
-		
 		int secondTemp = input;
 		int digit = 0;
 		int answer = 0;
@@ -417,7 +399,6 @@ public class EvaluationService {
 			return false;
 		}
 	}
-
 	/**
 	 * 10. Compute the prime factors of a given natural number.
 	 * 
@@ -438,7 +419,6 @@ public class EvaluationService {
 		}
 		return factors;
 	}
-
 	/**
 	 * 11. Create an implementation of the rotational cipher, also sometimes called
 	 * the Caesar cipher.
@@ -542,7 +522,6 @@ public class EvaluationService {
 		    }
 		    return num;
 	}
-
 	/**
 	 * 13 & 14. Create an implementation of the atbash cipher, an ancient encryption
 	 * system created in the Middle East.
@@ -703,8 +682,6 @@ public class EvaluationService {
 		} else {
 			return false;
 		}
-		
-
 	}
 
 	/**
@@ -756,7 +733,6 @@ public class EvaluationService {
 		
 		return ldt.plusSeconds(gigaSeconds);
 	}
-
 	/**
 	 * 18. Given a number, find the sum of all the unique multiples of particular
 	 * numbers up to but not including that number.
@@ -785,7 +761,6 @@ public class EvaluationService {
 		int sum = hs.stream().mapToInt(Integer::intValue).sum();
 		return sum;
 	}
-
 	/**
 	 * 19. Given a number determine whether or not it is valid per the Luhn formula.
 	 * 
@@ -845,7 +820,6 @@ public class EvaluationService {
 		}		
 		return false;
 	}
-
 	/**
 	 * 20. Parse and evaluate simple math word problems returning the answer as an
 	 * integer.
