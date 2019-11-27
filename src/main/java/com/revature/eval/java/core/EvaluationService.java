@@ -339,13 +339,16 @@ public class EvaluationService {
 	
 	
 	
-	public  String changeWord(String word) { // applied to each word in the String[]
+	public String changeWord(String word) { // applied to each word in the String[]
 		String vowels = "aeiou";
 		String changed = "";
 
 		for(int i = 0, j = 1; j < word.length(); j++) {
 			String chr = word.substring(i, j);
 
+			if(chr.equals("q")) {
+				return word.substring(2) + word.substring(0,2)+ "ay";
+			}
 			if(vowels.contains(chr)) { // checks to see if there vowels at beginning of word
 				return word.substring(i) + word.substring(0, i) + "ay";
 			}else {
@@ -584,8 +587,32 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String decodedString = "";
+			string = string.replaceAll(" ", "");
+			for(int i=0; i<string.length(); i++) {
+				char ch = string.charAt(i);
+				if(Character.isLowerCase(ch)) {
+					// using ASCII Dec number of char to check if in or out of bounds -- 25pt. differenc.
+					if(ch <= 'm') {
+						char newLetter = (char) ('z' - (ch - 'a'));
+						decodedString += newLetter;
+					} else {
+						char newLetter = (char) ('a' + ('z' - ch));
+						decodedString += newLetter;
+					}
+				} else if(Character.isUpperCase(ch)) {
+					if(ch <= 'M') {
+						char newLetter = (char) ('Z' - (ch - 'A'));
+						decodedString += newLetter;
+					} else {
+						char newLetter = (char) ('A' + ('Z' - ch));
+						decodedString += newLetter;
+					}
+				} else {
+					decodedString += ch;
+				}
+			}
+			return  decodedString;
 		}
 	}
 
@@ -756,7 +783,6 @@ public class EvaluationService {
 	public static boolean isLuhnValid(String string) {
 		string=string.replace(" ", "");
 		string=string.replace("([a-z]","");
-		string=string.replace("-", "");
 		int[] numbers=new int[string.length()];
 		int i;
 		for(i=0;i<string.length();i++) {
