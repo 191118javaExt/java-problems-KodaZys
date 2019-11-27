@@ -592,7 +592,7 @@ public class EvaluationService {
 			for(int i=0; i<string.length(); i++) {
 				char ch = string.charAt(i);
 				if(Character.isLowerCase(ch)) {
-					// using ASCII Dec number of char to check if in or out of bounds -- 25pt. differenc.
+					// using ASCII Dec number of char to check if in or out of bounds
 					if(ch <= 'm') {
 						char newLetter = (char) ('z' - (ch - 'a'));
 						decodedString += newLetter;
